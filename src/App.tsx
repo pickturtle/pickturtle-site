@@ -11,6 +11,7 @@ import { ComparePage } from "@/pages/ComparePage";
 import { AboutPage } from "@/pages/AboutPage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ScrollObserver } from "@/shared/ScrollObserver";
+import { CatalogPage } from "@/pages/CatalogPage"; // Nova importação
 
 type PageId = "home" | "category" | "product" | "review" | "compare" | "about";
 
@@ -39,6 +40,8 @@ function App() {
           <main className="flex-1">
             <Routes>
               <Route path="/category" element={<CategoryPage />} />
+              <Route path="/catalog" element={<CatalogPage />} />{" "}
+              {/* Nova rota */}
               <Route path="/products/:slug" element={<ProductPage />} />
               <Route path="/review" element={<ReviewPage />} />
               <Route path="/compare" element={<ComparePage />} />

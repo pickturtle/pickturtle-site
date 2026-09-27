@@ -7,7 +7,7 @@ import { Container } from "@/components/Container";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 
 const navLinks = [
-  { label: "Find products", to: "/product" },
+  { label: "Find products", to: "/catalog" },
   { label: "Categories", to: "/category" },
   { label: "Reviews", to: "/review" },
   { label: "Compare", to: "/compare" },
