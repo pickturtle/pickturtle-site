@@ -5,13 +5,13 @@
 @layer base {
   :root {
     /* Brand tokens */
-    --pt-navy: #0C1A2C;
+    --pt-navy: #0c1a2c;
     --pt-navy-2: #0f2138;
     --pt-navy-3: #16294a;
-    --pt-green: #0DD95F;
+    --pt-green: #0dd95f;
     --pt-green-dark: #0bb452;
     --pt-green-soft: #e7fbef;
-    --pt-white: #FFFFFF;
+    --pt-white: #ffffff;
 
     /* shadcn-style semantic tokens — LIGHT */
     --background: 0 0% 100%;
@@ -52,8 +52,9 @@
     --brand-soft: 215 49% 12% / 0.04;
     --green-fg: 152 90% 30%;
     --nav-bg: 0 0% 100%;
-    --shadow-card: 0 1px 2px rgba(12,26,44,0.04), 0 8px 24px -8px rgba(12,26,44,0.08);
-    --shadow-pop: 0 12px 40px -12px rgba(12,26,44,0.18);
+    --shadow-card:
+      0 1px 2px rgba(12, 26, 44, 0.04), 0 8px 24px -8px rgba(12, 26, 44, 0.08);
+    --shadow-pop: 0 12px 40px -12px rgba(12, 26, 44, 0.18);
   }
 
   .dark {
@@ -88,8 +89,9 @@
     --brand-soft: 210 40% 96% / 0.04;
     --green-fg: 152 90% 55%;
     --nav-bg: 215 49% 6% / 0.85;
-    --shadow-card: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -8px rgba(0,0,0,0.5);
-    --shadow-pop: 0 12px 40px -12px rgba(0,0,0,0.6);
+    --shadow-card:
+      0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -8px rgba(0, 0, 0, 0.5);
+    --shadow-pop: 0 12px 40px -12px rgba(0, 0, 0, 0.6);
   }
 }
 
@@ -98,23 +100,40 @@
     @apply border-border;
   }
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family:
+      "Inter",
+      system-ui,
+      -apple-system,
+      sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  h1, h2, h3, h4, h5 {
-    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
     letter-spacing: -0.02em;
   }
 }
 
 @layer utilities {
-  .font-display { font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif; }
-  .text-balance { text-wrap: balance; }
-  .no-scrollbar::-webkit-scrollbar { display: none; }
-  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .font-display {
+    font-family: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }

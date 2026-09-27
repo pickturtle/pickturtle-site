@@ -1,16 +1,17 @@
-import { useEffect, useState } from 'react';
-import { ArrowRight, Menu, Search, X } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { Logo } from '@/components/Logo';
-import { ThemeToggle } from '@/components/ThemeToggle';
-import { Container } from '@/components/Container';
+import { useEffect, useState } from "react";
+import { ArrowRight, Menu, Search, X } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Logo } from "@/components/Logo";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { Container } from "@/components/Container";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 
 const navLinks = [
-  { label: 'Find products', href: '#product' },
-  { label: 'Categories', href: '#category' },
-  { label: 'Reviews', href: '#review' },
-  { label: 'Compare', href: '#compare' },
-  { label: 'About', href: '#about' },
+  { label: "Find products", to: "/product" },
+  { label: "Categories", to: "/category" },
+  { label: "Reviews", to: "/review" },
+  { label: "Compare", to: "/compare" },
+  { label: "About", to: "/about" },
 ];
 
 export function Header() {
@@ -21,24 +22,24 @@ export function Header() {
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     };
   }, [mobileOpen]);
 
   return (
     <header
       className={cn(
-        'sticky top-0 z-50 transition-all duration-300',
+        "sticky top-0 z-50 transition-all duration-300",
         scrolled
-          ? 'border-b border-border bg-background/85 backdrop-blur-lg supports-[backdrop-filter]:bg-background/70'
-          : 'border-b border-transparent bg-background',
+          ? "border-b border-border bg-background/85 backdrop-blur-lg supports-[backdrop-filter]:bg-background/70"
+          : "border-b border-transparent bg-background",
       )}
     >
       <Container>
@@ -51,45 +52,53 @@ export function Header() {
             >
               <Menu className="h-5 w-5" />
             </button>
-            <a href="#top" aria-label="PickTurtle home">
+            <Link to="/" aria-label="PickTurtle home">
               <Logo />
-            </a>
+            </Link>
           </div>
 
           <nav className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
+              <Link
+                key={link.to}
+                to={link.to}
                 className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
           <div className="flex items-center gap-2">
-            <button
+            {/*     <button
               onClick={() => setSearchOpen((p) => !p)}
               aria-label="Search"
               className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-foreground transition-all hover:border-foreground/30 hover:bg-secondary"
             >
               <Search className="h-4 w-4" />
-            </button>
-            <ThemeToggle />
+            </button> */}
+            {/*  <ThemeToggle /> */}
             <a
               href="#newsletter"
-              className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-foreground px-4 py-2 text-sm font-semibold text-background transition-all hover:opacity-90"
+              onClick={(e) => {
+                e.preventDefault();
+                setMobileOpen(false);
+
+                document.getElementById("newsletter")?.scrollIntoView({
+                  behavior: "smooth",
+                });
+              }}
+              className="flex w-full items-center justify-center gap-2 rounded-full bg-foreground px-4 py-3 text-sm font-semibold text-background"
             >
               Get recommendations
-              <ArrowRight className="h-3.5 w-3.5" />
+              <ArrowRight className="h-4 w-4" />
             </a>
           </div>
         </div>
       </Container>
 
       {/* Search bar */}
-      {searchOpen && (
+      {/*       {searchOpen && (
         <div className="border-t border-border bg-background/95 backdrop-blur-lg">
           <Container>
             <div className="flex items-center gap-3 py-3">
@@ -99,7 +108,7 @@ export function Header() {
                 placeholder="Search products, categories, and guides…"
                 className="flex-1 bg-transparent text-base text-foreground placeholder:text-muted-foreground focus:outline-none"
                 onKeyDown={(e) => {
-                  if (e.key === 'Escape') setSearchOpen(false);
+                  if (e.key === "Escape") setSearchOpen(false);
                 }}
               />
               <kbd className="hidden sm:inline-flex shrink-0 items-center rounded border border-border px-1.5 py-0.5 text-xs text-muted-foreground">
@@ -114,7 +123,7 @@ export function Header() {
             </div>
           </Container>
         </div>
-      )}
+      )} */}
 
       {/* Mobile drawer */}
       {mobileOpen && (
@@ -136,20 +145,27 @@ export function Header() {
             </div>
             <nav className="flex flex-col gap-1 p-4">
               {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
+                <Link
+                  key={link.to}
+                  to={link.to}
                   onClick={() => setMobileOpen(false)}
                   className="rounded-xl px-4 py-3 text-base font-medium text-foreground transition-colors hover:bg-secondary"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
             </nav>
             <div className="mt-auto border-t border-border p-4">
               <a
                 href="#newsletter"
-                onClick={() => setMobileOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setMobileOpen(false);
+
+                  document.getElementById("newsletter")?.scrollIntoView({
+                    behavior: "smooth",
+                  });
+                }}
                 className="flex w-full items-center justify-center gap-2 rounded-full bg-foreground px-4 py-3 text-sm font-semibold text-background"
               >
                 Get recommendations

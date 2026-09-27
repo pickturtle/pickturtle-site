@@ -1,26 +1,45 @@
-import { ArrowRight, BarChart3, Check, ChevronRight, Sparkles, TrendingUp, Zap } from 'lucide-react';
-import { Container } from '@/components/Container';
-import { Section } from '@/components/Section';
-import { ProductCard } from '@/features/products/components';
-import { CategoryCard } from '@/features/categories/components';
-import { ReviewCard } from '@/features/reviews/components';
-import { products, categories, reviews, trendingSearches, stats } from '@/data/mock-data';
+import {
+  ArrowRight,
+  BarChart3,
+  Check,
+  ChevronRight,
+  Sparkles,
+  TrendingUp,
+  Zap,
+} from "lucide-react";
+import { Container } from "@/components/Container";
+import { Section } from "@/components/Section";
+import { ProductCard } from "@/features/products/components";
+import { CategoryCard } from "@/features/categories/components";
+import { ReviewCard } from "@/features/reviews/components";
+import {
+  products,
+  categories,
+  reviews,
+  trendingSearches,
+  stats,
+} from "@/data/mock-data";
+import { useLocation } from "react-router-dom";
 
 export function HomePage() {
   const featured = products.slice(0, 3);
   const recommended = products.filter((p) => p.recommended).slice(0, 4);
-
+  // Use `useLocation` para obter o caminho atual (não precisa de `useState`)
+  const location = useLocation();
   return (
     <>
       {/* Hero */}
-      <section id="top" className="relative overflow-hidden border-b border-border">
+      <section
+        id="top"
+        className="relative overflow-hidden border-b border-border"
+      >
         {/* Background grid */}
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.04] dark:opacity-[0.06]"
           style={{
             backgroundImage:
-              'linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)',
-            backgroundSize: '56px 56px',
+              "linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)",
+            backgroundSize: "56px 56px",
           }}
         />
         {/* Glow */}
@@ -38,8 +57,9 @@ export function HomePage() {
                 <span className="text-accent-foreground">love to use.</span>
               </h1>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-                We test, compare, and explain the products that make everyday life a little
-                better. No hype. Just clear recommendations from people who care.
+                We test, compare, and explain the products that make everyday
+                life a little better. No hype. Just clear recommendations from
+                people who care.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <a
@@ -59,7 +79,7 @@ export function HomePage() {
               </div>
               <div className="mt-10 flex items-center gap-4">
                 <div className="flex -space-x-2">
-                  {['MC', 'AR', 'JL', 'SP'].map((init, i) => (
+                  {["MC", "AR", "JL", "SP"].map((init, i) => (
                     <span
                       key={i}
                       className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-background bg-secondary text-xs font-bold text-foreground"
@@ -69,8 +89,12 @@ export function HomePage() {
                   ))}
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-foreground">Trusted by 120,000+ readers</p>
-                  <p className="text-xs text-muted-foreground">Making better buys every month</p>
+                  <p className="text-sm font-semibold text-foreground">
+                    Trusted by 120,000+ readers
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    Making better buys every month
+                  </p>
                 </div>
               </div>
             </div>
@@ -100,15 +124,23 @@ export function HomePage() {
                       <TrendingUp className="h-5 w-5" />
                     </div>
                     <div>
-                      <p className="font-display text-2xl font-extrabold text-foreground">2,400+</p>
-                      <p className="text-xs text-muted-foreground">products researched</p>
+                      <p className="font-display text-2xl font-extrabold text-foreground">
+                        2,400+
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        products researched
+                      </p>
                     </div>
                   </div>
                 </div>
                 {/* Floating rating card */}
                 <div className="absolute -right-4 top-8 hidden rounded-2xl border border-border bg-card p-3 shadow-[var(--shadow-pop)] sm:block">
-                  <p className="text-xs font-semibold text-muted-foreground">Reader rating</p>
-                  <p className="font-display text-xl font-bold text-foreground">4.9 / 5</p>
+                  <p className="text-xs font-semibold text-muted-foreground">
+                    Reader rating
+                  </p>
+                  <p className="font-display text-xl font-bold text-foreground">
+                    4.9 / 5
+                  </p>
                   <p className="text-xs text-muted-foreground">12k reviews</p>
                 </div>
               </div>
@@ -126,9 +158,17 @@ export function HomePage() {
               Trending now
             </span>
             {trendingSearches.map((term, i) => (
-              <span key={i} className="flex shrink-0 items-center gap-3 text-sm text-muted-foreground">
-                {i > 0 && <ChevronRight className="h-3 w-3 text-muted-foreground/40" />}
-                <a href="#products" className="transition-colors hover:text-foreground">
+              <span
+                key={i}
+                className="flex shrink-0 items-center gap-3 text-sm text-muted-foreground"
+              >
+                {i > 0 && (
+                  <ChevronRight className="h-3 w-3 text-muted-foreground/40" />
+                )}
+                <a
+                  href="#products"
+                  className="transition-colors hover:text-foreground"
+                >
                   {term}
                 </a>
               </span>
@@ -202,20 +242,23 @@ export function HomePage() {
               <span className="text-accent-foreground">More confidence.</span>
             </h2>
             <p className="mt-6 max-w-md text-lg leading-relaxed text-muted-foreground">
-              Buying tech shouldn't feel like a second job. Our team cuts through the specs and
-              sponsored noise so you can make a decision that feels right.
+              Buying tech shouldn't feel like a second job. Our team cuts
+              through the specs and sponsored noise so you can make a decision
+              that feels right.
             </p>
             <div className="mt-8 space-y-3">
               {[
-                'Independent recommendations',
-                'Real-world testing',
-                'Plain-English advice',
+                "Independent recommendations",
+                "Real-world testing",
+                "Plain-English advice",
               ].map((point) => (
                 <div key={point} className="flex items-center gap-3">
                   <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent text-accent-foreground">
                     <Check className="h-3.5 w-3.5" />
                   </span>
-                  <span className="text-base font-medium text-foreground">{point}</span>
+                  <span className="text-base font-medium text-foreground">
+                    {point}
+                  </span>
                 </div>
               ))}
             </div>
@@ -238,7 +281,9 @@ export function HomePage() {
                 <p className="font-display text-4xl font-extrabold tracking-tight text-foreground">
                   {stat.value}
                 </p>
-                <p className="mt-1 text-sm text-muted-foreground">{stat.label}</p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {stat.label}
+                </p>
               </div>
             ))}
           </div>
@@ -285,8 +330,8 @@ export function HomePage() {
                 <span className="text-accent-foreground">you commit.</span>
               </h2>
               <p className="mt-4 max-w-md text-base leading-relaxed text-background/70">
-                Put your top picks head-to-head and see what actually separates them. Specs, scores,
-                and prices in one view.
+                Put your top picks head-to-head and see what actually separates
+                them. Specs, scores, and prices in one view.
               </p>
               <a
                 href="#compare"
@@ -299,18 +344,32 @@ export function HomePage() {
             <div className="flex items-center justify-center gap-6">
               <div className="flex flex-col items-center gap-3">
                 <div className="h-24 w-24 overflow-hidden rounded-2xl border border-background/20 bg-background/10">
-                  <img src={featured[0].image} alt="" className="h-full w-full object-cover" />
+                  <img
+                    src={featured[0].image}
+                    alt=""
+                    className="h-full w-full object-cover"
+                  />
                 </div>
                 <p className="text-sm font-semibold">{featured[0].name}</p>
-                <p className="font-display text-2xl font-extrabold text-accent-foreground">9.4</p>
+                <p className="font-display text-2xl font-extrabold text-accent-foreground">
+                  9.4
+                </p>
               </div>
-              <span className="font-display text-xl font-bold text-background/40">VS</span>
+              <span className="font-display text-xl font-bold text-background/40">
+                VS
+              </span>
               <div className="flex flex-col items-center gap-3">
                 <div className="h-24 w-24 overflow-hidden rounded-2xl border border-background/20 bg-background/10">
-                  <img src={featured[1].image} alt="" className="h-full w-full object-cover" />
+                  <img
+                    src={featured[1].image}
+                    alt=""
+                    className="h-full w-full object-cover"
+                  />
                 </div>
                 <p className="text-sm font-semibold">{featured[1].name}</p>
-                <p className="font-display text-2xl font-extrabold text-background/70">9.1</p>
+                <p className="font-display text-2xl font-extrabold text-background/70">
+                  9.1
+                </p>
               </div>
             </div>
           </div>
