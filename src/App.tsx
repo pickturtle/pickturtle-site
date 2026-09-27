@@ -39,7 +39,7 @@ function App() {
           <main className="flex-1">
             <Routes>
               <Route path="/category" element={<CategoryPage />} />
-              <Route path="/product" element={<ProductPage />} />
+              <Route path="/products/:slug" element={<ProductPage />} />
               <Route path="/review" element={<ReviewPage />} />
               <Route path="/compare" element={<ComparePage />} />
               <Route path="/about" element={<AboutPage />} />

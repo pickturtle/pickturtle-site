@@ -1,16 +1,24 @@
-import { ArrowRight, Check, ExternalLink, ShieldCheck, Truck } from 'lucide-react';
-import { Container } from '@/components/Container';
-import { Section } from '@/components/Section';
-import { Breadcrumbs } from '@/components/Breadcrumbs';
-import { Badge } from '@/components/Badge';
-import { Rating } from '@/components/Rating';
-import { PriceDisplay } from '@/components/PriceDisplay';
-import { ProductCard } from '@/features/products/components';
-import { ReviewSummary } from '@/features/reviews/components';
-import { products } from '@/data/mock-data';
+import {
+  ArrowRight,
+  Check,
+  ExternalLink,
+  ShieldCheck,
+  Truck,
+} from "lucide-react";
+import { Container } from "@/components/Container";
+import { Section } from "@/components/Section";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { Badge } from "@/components/Badge";
+import { Rating } from "@/components/Rating";
+import { PriceDisplay } from "@/components/PriceDisplay";
+import { ProductCard } from "@/features/products/components";
+import { ReviewSummary } from "@/features/reviews/components";
+import { products } from "@/data/mock-data";
+import { useParams } from "react-router-dom";
 
 export function ProductPage() {
-  const product = products[0]; // MacBook Air M3
+  const { slug } = useParams(); // Captura o parâmetro da URL
+  const product = products.find((p) => p.slug === slug) || products[0]; // Busca o produto ou usa o padrão
   const related = products.filter((p) => p.slug !== product.slug).slice(0, 3);
 
   return (
@@ -18,8 +26,8 @@ export function ProductPage() {
       <Section spacing="tight">
         <Breadcrumbs
           items={[
-            { label: 'Home', href: '#top' },
-            { label: product.category, href: '#categories' },
+            { label: "Home", href: "#top" },
+            { label: product.category, href: "#categories" },
             { label: product.name },
           ]}
           className="mb-6"
@@ -29,7 +37,11 @@ export function ProductPage() {
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
           <div className="overflow-hidden rounded-3xl border border-border bg-secondary">
             <div className="aspect-square">
-              <img src={product.image} alt={product.name} className="h-full w-full object-cover" />
+              <img
+                src={product.image}
+                alt={product.name}
+                className="h-full w-full object-cover"
+              />
             </div>
           </div>
 
@@ -42,9 +54,15 @@ export function ProductPage() {
               {product.name}
             </h1>
             <div className="mt-3">
-              <Rating value={product.rating} count={product.reviewCount} size="md" />
+              <Rating
+                value={product.rating}
+                count={product.reviewCount}
+                size="md"
+              />
             </div>
-            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{product.summary}</p>
+            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+              {product.summary}
+            </p>
 
             <div className="mt-6 rounded-2xl border border-border bg-card p-5 shadow-[var(--shadow-card)]">
               <div className="flex items-end justify-between gap-4">
@@ -67,16 +85,22 @@ export function ProductPage() {
                 </a>
               </div>
               <p className="mt-3 text-xs text-muted-foreground">
-                Affiliate link — we may earn a commission, which supports our independent reviews.
+                Affiliate link — we may earn a commission, which supports our
+                independent reviews.
               </p>
             </div>
 
             {/* Quick specs */}
             <div className="mt-6 grid grid-cols-2 gap-3">
               {product.specs.slice(0, 4).map((spec) => (
-                <div key={spec.label} className="rounded-xl border border-border bg-card p-3">
+                <div
+                  key={spec.label}
+                  className="rounded-xl border border-border bg-card p-3"
+                >
                   <p className="text-xs text-muted-foreground">{spec.label}</p>
-                  <p className="mt-0.5 text-sm font-semibold text-foreground">{spec.value}</p>
+                  <p className="mt-0.5 text-sm font-semibold text-foreground">
+                    {spec.value}
+                  </p>
                 </div>
               ))}
             </div>
@@ -92,12 +116,21 @@ export function ProductPage() {
           </div>
           <div>
             <div className="rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)]">
-              <h3 className="font-display text-lg font-bold text-foreground">Specifications</h3>
+              <h3 className="font-display text-lg font-bold text-foreground">
+                Specifications
+              </h3>
               <dl className="mt-4 divide-y divide-border">
                 {product.specs.map((spec) => (
-                  <div key={spec.label} className="flex justify-between gap-4 py-3">
-                    <dt className="text-sm text-muted-foreground">{spec.label}</dt>
-                    <dd className="text-right text-sm font-semibold text-foreground">{spec.value}</dd>
+                  <div
+                    key={spec.label}
+                    className="flex justify-between gap-4 py-3"
+                  >
+                    <dt className="text-sm text-muted-foreground">
+                      {spec.label}
+                    </dt>
+                    <dd className="text-right text-sm font-semibold text-foreground">
+                      {spec.value}
+                    </dd>
                   </div>
                 ))}
               </dl>
